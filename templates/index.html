@@ -1,0 +1,13 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>TeamSpeak3 server info</title>
+</head>
+<body>
+<div style="overflow-y: scroll; height:500px;">
+  <pre>{% for line in params %}
+{{ line[0] }} = {{ line[1] }}{% endfor %}</pre>
+</div>
+
+</body>
