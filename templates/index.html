@@ -49,7 +49,7 @@
           </tr>
           <tr>
             <td>Clients online</td>
-            <td>{{ params['virtualserver_clientsonline'] }}</td>
+            <td>{{ params['virtualserver_clientsonline'] | int - 1 }}</td>
           </tr>
           <tr>
             <td>Uptime</td>
