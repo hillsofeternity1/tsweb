@@ -1,13 +1,105 @@
 <!DOCTYPE HTML>
 <html>
-<head>
-    <meta charset="utf-8">
-    <title>TeamSpeak3 server info</title>
-</head>
-<body>
-<div style="overflow-y: scroll; height:500px;">
-  <pre>{% for line in params %}
-{{ line[0] }} = {{ line[1] }}{% endfor %}</pre>
-</div>
 
+<head>
+  <meta charset="utf-8">
+  <title>TeamSpeak3 server info</title>
+</head>
+
+<body style="width: 100vw;">
+  <h1>TeamSpeak 3 Server Query</h1>
+  <h3>ultimate full burst revolution fetch tool</h3>
+  <form method="GET">
+    <label>Server address: 
+      <input type="text" name="server" placeholder="ts.hexor.ru" value="{% if host %}{{ host }}{% else %}ts.hexor.ru{% endif %}">
+      <input type="text" name="port" placeholder="10011" value="10011">
+      <input type="submit" value="Fetch info">
+    </label>
+  </form>
+  {% if params['error'] %}<b>{{ params['error'] }}</b>{% endif %} {% if params['virtualserver_name'] %}
+  <div>
+    <table class="tg">
+      <th>
+        <h3>Most valuable info below</h3>
+      </th>
+      <th>
+        <h3>Full info below</h3>
+      </th>
+      <tr>
+        <td class="tg-yw4l">
+          <div style="overflow-x: scroll; height:280px; width: 49vw;">
+
+            <pre><table class="tg">
+          <tr>
+          <tr>
+            <td>Server name</td>
+            <td>{{ params['virtualserver_name'] }}</td>
+          </tr>
+          <tr>
+            <td>Platform</td>
+            <td>{{ params['virtualserver_platform'] }}</td>
+          </tr>
+          <tr>
+            <td>Version</td>
+            <td>{{ params['virtualserver_version'] }}</td>
+          </tr>
+          <tr>
+            <td>Max clients</td>
+            <td>{{ params['virtualserver_maxclients'] }}</td>
+          </tr>
+          <tr>
+            <td>Clients online</td>
+            <td>{{ params['virtualserver_clientsonline'] }}</td>
+          </tr>
+          <tr>
+            <td>Uptime</td>
+            <td>{{ params['virtualserver_uptime'] }} sec. / {{ (params['virtualserver_uptime'] | int / 60 / 60 / 24) | round(1, 'floor') }} days.</td>
+          </tr>
+          <tr>
+            <td>Server port</td>
+            <td>{{ params['virtualserver_port'] }}</td>
+          </tr>
+          <tr>
+            <td>Security level</td>
+            <td>{{ params['virtualserver_needed_identity_security_level'] }}</td>
+          </tr>
+          <tr>
+            <td>Host message</td>
+            <td>{{ params['virtualserver_hostmessage'] }}</td>
+          </tr>
+          <tr>
+            <td>Banner URL</td>
+            <td>{{ params['virtualserver_hostbanner_url'] }}</td>
+          </tr>
+          <tr>
+            <td>Connections since restart</td>
+            <td>{{ params['virtualserver_client_connections'] }}</td>
+          </tr>
+          <tr>
+            <td>Total server traffic</td>
+            <td>{{ ((params['virtualserver_total_bytes_downloaded'] | int + params['virtualserver_total_bytes_uploaded'] | int) / 1024 / 1024) | round(1, 'floor') }} MB</td>
+          </tr>
+            <td>Server ID</td>
+            <td>{{ params['virtualserver_unique_identifier'] }}</td>
+          </tr>
+          <tr>
+            <td>Get JSON with full info</td>
+            <td><a href="./api/?server={{ params['virtualserver_name'] }}&port=10011">Get JSON with full info here</a></td>
+          </tr>
+        </table></pre>
+          </div>
+        </td>
+        <td class="tg-yw4l">
+          <div style="overflow-y: scroll;overflow-x: scroll; height:280px; width: 49vw">
+            <pre>{% for key, value in params.items() %}
+{{ key }} = {{ value }}{% endfor %}</pre>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+  {% endif %}
+  <hr><br>
+  <a href="https://github.com/hillsofeternity1/tsweb">project on GitHub</a>
+  <p>@UltraDesu {{ year }}</p>
 </body>
