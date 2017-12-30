@@ -77,7 +77,7 @@
           </tr>
           <tr>
             <td>Total server traffic</td>
-            <td>{{ ((params['virtualserver_total_bytes_downloaded'] | int + params['virtualserver_total_bytes_uploaded'] | int) / 1024 / 1024) | round(1, 'floor') }} MB</td>
+            <td>{{ ((params['connection_bytes_received_total'] | int + params['connection_bytes_sent_total'] | int) / 1024 / 1024) | round(1, 'floor') }} MB</td>
           </tr>
             <td>Server ID</td>
             <td>{{ params['virtualserver_unique_identifier'] }}</td>
