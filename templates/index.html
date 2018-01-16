@@ -77,7 +77,7 @@
           </tr>
           <tr>
             <td>Total server traffic</td>
-            <td>{{ ((params['connection_bytes_received_total'] | int + params['connection_bytes_sent_total'] | int) / 1024 / 1024) | round(1, 'floor') }} MB</td>
+            <td>{% if (((params['connection_bytes_received_total'] | int + params['connection_bytes_sent_total'] | int) / 1024 / 1024) | round(1, 'floor')) < 3000 %}{{ ((params['connection_bytes_received_total'] | int + params['connection_bytes_sent_total'] | int) / 1024 / 1024) | round(1, 'floor') }} MB {% else %}{{ ((params['connection_bytes_received_total'] | int + params['connection_bytes_sent_total'] | int) / 1024 / 1024/1024) | round(1, 'floor') }} GB {% endif %}</td>
           </tr>
             <td>Server ID</td>
             <td>{{ params['virtualserver_unique_identifier'] }}</td>
